@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        height: 2000px; /* Height to enable scrolling */
+        padding: 20px;
+    }
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+    }
+</style>
+</head>
+<body>
+<div class="nav">
+    <button id="home"><a href="home.html">home</a></button>
+    <button id="contact">Contact</button>
+    <button id="info">Info</button>
+</div>
+<div class="container">
+    <h1>Welcome to Voice Controlled Website</h1>
+    <p>This is a simple demonstration of voice-controlled navigation.</p>
+</div>
+
+<script>
+    // Voice recognition setup
+    let recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+    recognition.onresult = function(event) {
+        let result = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        console.log('You said: ', result);
+
+        // Voice commands
+        if (result.includes('scroll down')) {
+            window.scrollBy(0, 100);
+        } else if (result.includes('scroll up')) {
+            window.scrollBy(0, -100);
+        } else if (result.includes('home')) {
+            document.getElementById('home').click();
+        } else if (result.includes('contact')) {
+            document.getElementById('contact').click();
+        } else if (result.includes('info')) {
+            document.getElementById('info').click();
+        }
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+    };
+
+    // Start recognition
+    recognition.start();
+</script>
+</body>
+</html>
+
+
+
+
+
