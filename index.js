@@ -20,7 +20,7 @@ app.post("/signup",(req,res)=>{
         email:email
     }).then(async(u)=>{
         // console.log(u.length);
-        if(u.length!=0){
+        if(u.length==0){
             const read=await fs.open("used.html","r");
             const st=read.createReadStream();
             st.pipe(res);
@@ -46,7 +46,7 @@ app.post("/login",(req,res)=>{
         email:email,
         password:password
     }).then(async(user)=>{
-        if(user.length!=0){
+        if(user.length==0){
             const read=await fs.open("web.html","r");
             const st=read.createReadStream();
             st.pipe(res);
